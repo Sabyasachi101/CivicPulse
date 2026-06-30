@@ -1,0 +1,6 @@
+{
+  "name": "CivicPulse",
+  "description": "A hyperlocal community problem-reporting platform for Indian cities with AI-powered categorization, duplicate detection, and predictive insights.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

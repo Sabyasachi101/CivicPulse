@@ -1,0 +1,120 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile containing points, role, badges and contact details",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "role": { "type": "string", "enum": ["citizen", "official", "admin"] },
+        "ward": { "type": "string" },
+        "points": { "type": "number" },
+        "badges": { "type": "array" },
+        "streak": { "type": "number" },
+        "lastReportedDate": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "name", "email", "role", "ward", "points", "badges", "streak", "createdAt"]
+    },
+    "Issue": {
+      "title": "Issue",
+      "description": "A reported civic issue including category, description, and status history",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "severity": { "type": "number" },
+        "status": { "type": "string", "enum": ["reported", "under_review", "verified", "assigned", "in_progress", "resolved", "closed"] },
+        "location": { "type": "object" },
+        "media": { "type": "array" },
+        "reportedBy": { "type": "string" },
+        "reportedByName": { "type": "string" },
+        "upvotes": { "type": "array" },
+        "duplicateOf": { "type": "string" },
+        "priorityScore": { "type": "number" },
+
+        "source": { "type": "string", "enum": ["app", "whatsapp"] },
+        "statusHistory": { "type": "array" },
+        "assignedTo": { "type": "string" },
+        "department": { "type": "string" },
+        "slaDue": { "type": "string" },
+        "resolvedProofUrl": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "title", "description", "category", "severity", "status", "location", "media", "reportedBy", "upvotes", "priorityScore", "source", "statusHistory", "createdAt", "updatedAt"]
+    },
+    "Insight": {
+      "title": "Insight",
+      "description": "AI-generated predictive insights on a specific ward",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "ward": { "type": "string" },
+        "summary": { "type": "string" },
+        "generatedAt": { "type": "string" },
+        "issueCount": { "type": "number" },
+        "topCategory": { "type": "string" },
+        "pulseScore": { "type": "number" }
+      },
+      "required": ["id", "ward", "summary", "generatedAt", "issueCount", "topCategory", "pulseScore"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "System or automated notification sent to a citizen regarding status update, badge earned, etc.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "message": { "type": "string" },
+        "type": { "type": "string", "enum": ["status_change", "badge_earned", "insight_generated", "upvote"] },
+        "read": { "type": "boolean" },
+        "issueId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "message", "type", "read", "createdAt"]
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "User comment on an issue discussion thread",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "issueId": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userRole": { "type": "string", "enum": ["citizen", "official", "admin"] },
+        "text": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "issueId", "userId", "userName", "userRole", "text", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Collection containing all registered citizen and municipal official user profiles"
+    },
+    "/issues/{issueId}": {
+      "schema": "Issue",
+      "description": "Collection containing all reported municipal issues and grievances"
+    },
+    "/insights/{insightId}": {
+      "schema": "Insight",
+      "description": "Collection containing AI ward level predictive insights"
+    },
+    "/notifications/{notificationId}": {
+      "schema": "Notification",
+      "description": "Collection of user notifications about their reports and comments"
+    },
+    "/issues/{issueId}/comments/{commentId}": {
+      "schema": "Comment",
+      "description": "Subcollection of discussion comments under each issue"
+    }
+  }
+}
