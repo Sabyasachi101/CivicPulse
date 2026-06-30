@@ -13,11 +13,6 @@ CivicPulse is a hyperlocal civic responsiveness and grievance-routing platform I
 
 ---
 
-## 📸 Preview
-
-> _Add a hero screenshot and a short GIF of the 4-step report wizard here._
-
----
 
 ## 🧱 Tech Stack
 
