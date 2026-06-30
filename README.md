@@ -2,7 +2,7 @@
 
 CivicPulse is an advanced hyperlocal civic responsiveness and grievance routing platform for modern Indian cities (designed for Bengaluru BBMP wards). Powered by Google Gemini AI, it enables citizens to snap photo proof of civic issues, auto-diagnose hazards, track municipal repair progress with strict SLA timers, and explore interactive maps of active issues.
 
-📍 **Live URL:** Hosted inside the Google AI Studio Sandbox Environment.
+📍 **Live URL:** https://civicpulse-372046801993.asia-southeast1.run.app
 
 ---
 
