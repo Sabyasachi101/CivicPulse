@@ -1,49 +1,96 @@
-# CivicPulse — Report. Verify. Resolve.
+# 📍 CivicPulse
 
-CivicPulse is an advanced hyperlocal civic responsiveness and grievance routing platform for modern Indian cities (designed for Bengaluru BBMP wards). Powered by Google Gemini AI, it enables citizens to snap photo proof of civic issues, auto-diagnose hazards, track municipal repair progress with strict SLA timers, and explore interactive maps of active issues.
+**Report. Verify. Resolve.**
 
-📍 **Live URL:** https://civicpulse-372046801993.asia-southeast1.run.app
+![Status](https://img.shields.io/badge/status-live-brightgreen)
+![Built with Gemini](https://img.shields.io/badge/AI-Gemini%20API-8E75B2)
+![React](https://img.shields.io/badge/frontend-React%20%2B%20Vite-61DAFB)
+![Node](https://img.shields.io/badge/backend-Node.js%20%2B%20Express-339933)
+
+CivicPulse is a hyperlocal civic responsiveness and grievance-routing platform I'm building for modern Indian cities, designed around Bengaluru's BBMP ward system. Citizens snap photo proof of civic issues — potholes, water leaks, broken streetlights, garbage overflow — and Google Gemini AI auto-diagnoses the hazard, scores its severity, and routes it to the correct municipal department (PWD, BWSSB, BESCOM, BBMP), all tracked against live SLA timers.
+
+**🔗 Live demo:** [civicpulse-372046801993.asia-southeast1.run.app](https://civicpulse-372046801993.asia-southeast1.run.app/)
+
+---
+
+## 📸 Preview
+
+> _Add a hero screenshot and a short GIF of the 4-step report wizard here._
+
+---
+
+## 🧱 Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React, Vite, Tailwind CSS v4, TypeScript |
+| Backend | Node.js, Express, esbuild (CJS bundling) |
+| AI | Google Gemini API (vision + text) |
+| Auth & Storage | Firebase |
+| Maps | Leaflet.js, CartoDB tile layers, Leaflet.markercluster, Leaflet.heat |
+| Deployment | Google Cloud Run |
 
 ---
 
 ## 🚀 Key Features
 
-### 1. ⚡ AI-Powered Grievance Wizard
-- **Step-by-Step Reporting:** A fluid 4-step wizard simplifying image uploads and GPS selection.
-- **Gemini Diagnostics:** Real-time AI analysis of uploaded proof (potholes, garbage, water leaks, streetlights) returning automated categorization, hazard severity scoring (1-5), and department routing (PWD, BWSSB, BESCOM, BBMP).
-- **Anonymous Reporting:** Optional toggle for privacy-focused report filing.
-- **SLA Countdown Timer:** Live target SLA countdown clocks based on hazard severity and Monsoon coefficient.
+### ⚡ AI-Powered Grievance Wizard
+- **4-step guided reporting** — image upload, GPS pin, AI-assisted categorization, review and submit
+- **Gemini diagnostics** — real-time analysis of uploaded proof returning hazard category, severity score (1–5), and department routing
+- **Anonymous reporting** — privacy-focused toggle, no account required
+- **SLA countdown timer** — live countdown derived from severity score and a monsoon-season coefficient
 
-### 2. 🗺️ Hyperlocal Map Explorer
-- **Marker Clusters:** Grouping dense markers dynamically using clustering algorithms to ensure performance.
-- **Heatmap Overlay:** Toggling city-wide visual thermal hazard densities on top of CartoDB map layers.
-- **Floating Filters:** Instant dashboard filtering on the map by Category checkboxes, Status pills, and Ward zones.
-- **Collapsible Sidewalk Sheet:** Click any pin on the map to expand a rich summary tray detailing original photo proof, geocoded address, and dispatcher notes.
+### 🗺️ Hyperlocal Map Explorer
+- **Marker clustering** for dense issue areas, optimized for performance
+- **Heatmap overlay** showing city-wide hazard density on CartoDB base layers
+- **Floating filters** — category, status, and ward, applied instantly
+- **Side sheet detail view** — click any pin to see photo proof, geocoded address, and dispatcher notes
 
-### 3. 🔄 Before & After Transformation Gallery
-- **Comparison Slider:** Custom swipe-to-compare drag bar allowing side-by-side visualization of original complaints vs. municipal resolution proof photos.
-- **Sharing Tool:** Copies deep-linkable URLs (`/issues/:id`) directly to clipboard for local sharing.
-- **Zone Filtering:** Dropdowns to narrow transformations by BBMP wards and category tags.
+### 🔄 Before & After Gallery
+- **Comparison slider** for original complaint vs. resolution proof photos
+- **Deep-linkable sharing** via `/issues/:id`
+- **Ward and category filtering**
 
-### 4. 🔗 Advanced Pathname Router
-- **Synced Deep Linking:** Clean address bar paths (`/`, `/map`, `/report`, `/issues/:id`, `/dashboard`, `/leaderboard`, `/insights`, `/gallery`) render their corresponding UI instantly.
-- **Popstate Resiliency:** Native forward/back browser buttons synchronize state flawlessly without page refreshes.
+### 🔗 Routing
+- Clean client-side paths: `/`, `/map`, `/report`, `/issues/:id`, `/dashboard`, `/leaderboard`, `/insights`, `/gallery`
+- Full browser back/forward support without page reloads
 
-### 5. 🎨 Visual Craftsmanship
-- **Aesthetic Dark Mode:** A class-based dark mode (`.dark`) using custom typography pairing (Inter, Space Grotesk, JetBrains Mono) with Tailwind CSS v4 variables.
-- **Sticky Blur Capsule:** Transparent glassmorphism header navigation bar with active state outlines and real-time citizen reporting streak counts.
+### 🎨 Design
+- Class-based dark mode with custom type pairing (Inter, Space Grotesk, JetBrains Mono)
+- Glassmorphism navigation header with live streak counter
 
 ---
 
-## 🛠️ Environmental Settings (`.env.example`)
+## 📂 Project Structure
 
-Make sure the following variables are specified in your system or workspace:
+```
+civicpulse/
+├── assets/.aistudio/    # AI Studio project metadata
+├── src/                 # React + Vite frontend source
+├── .env.example
+├── .gitignore
+├── firebase-applet-config.json
+├── firebase-blueprint.json
+├── firestore.rules
+├── index.html
+├── metadata.json
+├── package.json
+├── server.ts            # Express backend
+├── tsconfig.json
+└── vite.config.ts
+```
+
+---
+
+## ⚙️ Environment Variables
+
+Create a `.env` file based on `.env.example`:
 
 ```env
-# Gemini AI Studio API Key (Server-side exclusive)
+# Gemini AI Studio API key (server-side only — never expose to client)
 GEMINI_API_KEY=your_gemini_api_key_here
 
-# Firebase Web Application Client Configurations
+# Firebase web app config
 VITE_FIREBASE_API_KEY=your_firebase_api_key
 VITE_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
 VITE_FIREBASE_PROJECT_ID=your_firebase_project_id
@@ -54,38 +101,42 @@ VITE_FIREBASE_APP_ID=your_firebase_app_id
 
 ---
 
-## 📦 Local Setup Instructions
+## 📦 Local Setup
 
-Follow these simple steps to run CivicPulse locally on your machine:
+```bash
+# 1. Install dependencies
+npm install
 
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+# 2. Start the dev server (Express + Vite middleware, http://localhost:3000)
+npm run dev
 
-2. **Boot the full-stack development server:**
-   ```bash
-   npm run dev
-   ```
-   *The Express backend proxies Vite middleware to serve client assets on `http://localhost:3000`.*
+# 3. Build for production
+npm run build
+# → Vite bundles frontend to /dist
+# → esbuild compiles backend to /dist/server.cjs
 
-3. **Build the codebase for production:**
-   ```bash
-   npm run build
-   ```
-   *Vite bundles frontend assets under `/dist`, while `esbuild` compiles TypeScript backend controllers into CJS under `/dist/server.cjs`.*
-
-4. **Launch production server:**
-   ```bash
-   npm run start
-   ```
+# 4. Run production build
+npm run start
+```
 
 ---
 
-## 📋 Deployment Checklist
+## ☁️ Deployment (Google Cloud Run)
 
-- [x] Verify `package.json` build commands target standard output folders (`/dist`).
-- [x] Declare all secret variables cleanly in `.env.example`.
-- [x] Set `<title>` tag and custom civic map-pin favicon in `index.html`.
-- [x] Secure sensitive API operations (such as Gemini analyses) in server-side routes (`/api/*`) rather than exposing API keys on the client-side.
-- [x] Ensure Leaflet CSS/JS assets are pulled via reliable CDNs with HTTPS integrity hashes.
+- [ ] `package.json` build scripts target `/dist`
+- [ ] All secrets declared in `.env` (never committed) and mirrored in `.env.example`
+- [ ] `<title>` and favicon set in `index.html`
+- [ ] Gemini API calls happen only in server-side routes (`/api/*`) — key never reaches the client bundle
+- [ ] Leaflet CSS/JS loaded via HTTPS CDN with integrity hashes
+- [ ] Cloud Run service configured with environment secrets via Secret Manager
+
+---
+
+## 🗺️ Roadmap
+
+Planned for future iterations:
+
+- [ ] WhatsApp-based reporting for low-smartphone-literacy users
+- [ ] Offline PWA support with background sync
+- [ ] Multilingual input (Kannada, Hindi, Tamil)
+- [ ] Official municipal dashboard with SLA breach alerts
